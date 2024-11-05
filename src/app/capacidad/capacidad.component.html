@@ -1,0 +1,90 @@
+<div class="container mt-4">
+    <div class="row mt-3">
+        <div class="col-md-4">
+            <h4>Agregar Capacidades</h4>
+            <form (ngSubmit)="guardar()">
+                <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" class="form-control" id="nombre" [(ngModel)]="nombre" name="nombre" placeholder="Nombre de la capacidad" required>
+                </div>
+                <div class="form-group">
+                    <label for="descripcion">Descripción</label>
+                    <textarea class="form-control" id="descripcion" [(ngModel)]="descripcion" name="descripcion" placeholder="Descripción de la capacidad" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="tecnologias">Selecciona Tecnologías:</label>
+                    <select
+                      id="tecnologias"
+                      class="form-control"
+                      [(ngModel)]="tecnologiasSeleccionadas"
+                      multiple
+                      name="tecnologias"
+                    >
+                      <option *ngFor="let tecnologia of tecnologias" [value]="tecnologia.id">
+                        {{ tecnologia.nombre }}
+                      </option>
+                    </select>
+                  </div>
+                <!-- Mensaje de alerta -->
+                <div *ngIf="mostrarAlerta" class="alert alert-success mt-3" role="alert">
+                    Capacidad guardada con éxito.
+                </div>
+                <div *ngIf="conflicto" class="alert alert-warning mt-3" role="alert">
+                    {{conflicto}}
+                </div>
+                <!-- Botón con margen superior -->
+                <button type="submit" class="btn btn-primary mt-3">Guardar</button>
+              </form>
+        </div>
+        <div class="col-md-8">
+            <h4>Listar Capacidades</h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                          Nombre
+                          <!-- Botones para ordenar ascendente o descendente -->
+                          <button class="btn btn-link p-0" (click)="ordenar('nombre', 'asc')">
+                            <i class="bi bi-arrow-up"></i> <!-- Ícono para orden ascendente -->
+                          </button>
+                          <button class="btn btn-link p-0" (click)="ordenar('nombre', 'desc')">
+                            <i class="bi bi-arrow-down"></i> <!-- Ícono para orden descendente -->
+                          </button>
+                        </th>
+                        <th>Cantidad tecnologías
+                          <!-- Botones para ordenar ascendente o descendente -->
+                          <button class="btn btn-link p-0" (click)="ordenarCantidad('nrotecnologia', 'asc')">
+                            <i class="bi bi-arrow-up"></i> <!-- Ícono para orden ascendente -->
+                          </button>
+                          <button class="btn btn-link p-0" (click)="ordenarCantidad('nrotecnologia', 'desc')">
+                            <i class="bi bi-arrow-down"></i> <!-- Ícono para orden descendente -->
+                          </button>
+                        </th>
+                        <th>Descripción</th>
+                      </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let capacidad of capacidades">
+                        <td>{{ capacidad.nombre }}</td>
+                        <td>{{ capacidad.cantidadTecnologia }}</td>
+                        
+                        <td>
+                            <ul>
+                                <li *ngFor="let tecnologia of capacidad.listaTecnologias">
+                                    {{ tecnologia.id }}: {{ tecnologia.nombre }}
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- Controles de paginación -->
+            <div class="pagination-controls">
+                <button  (click)="paginaAnterior()" [disabled]="pageNumber === 0">Anterior</button>
+                <span>Página {{ pageNumber + 1 }} de {{ totalPages }}</span>
+                <button  (click)="paginaSiguiente()" [disabled]="pageNumber === totalPages - 1">Siguiente</button>
+            </div>
+        </div>
+    </div>
+    </div>
+    

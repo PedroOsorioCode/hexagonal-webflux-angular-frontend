@@ -1,0 +1,52 @@
+<header >
+  <div class="header-template">
+      <h1>Bootcamp Hexagonal</h1>
+      <h5>Webflux</h5>
+  </div>
+
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid" style="margin-left: 15px;margin-right: 15px;">
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/signUp" routerLinkActive="active" *ngIf="!isAuthenticated">Registrarse</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/signIn" routerLinkActive="active" *ngIf="!isAuthenticated">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/profile" routerLinkActive="active" *ngIf="isAuthenticated">Profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/tecnologia" routerLinkActive="active" *ngIf="isAuthenticated">Tecnologías</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/capacidades" routerLinkActive="active" *ngIf="isAuthenticated">Capacidades</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/bootcamp" routerLinkActive="active" *ngIf="isAuthenticated">Bootcamp</a>
+          </li>
+          
+        </ul>
+        <ul class="navbar-nav pull-rigth">
+          <li class="nav-item">
+          <a routerLink="" (click)="signOut()" *ngIf="isAuthenticated">
+            <i class="fas fa-fire"></i> Logout
+          </a>          
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+  
+  <div class="b-example-divider"></div>
+</header>
+
+
+
+<router-outlet></router-outlet>
